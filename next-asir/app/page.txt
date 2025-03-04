@@ -1,7 +1,5 @@
-'use client'
-import Link from "next/link";
 import "./globals.css";
-import { IoPersonCircle } from "react-icons/io5";
+import Link from "next/link";
 
 async function getLibros() {
   const res = await fetch("http://localhost:4000/libro");
@@ -9,32 +7,30 @@ async function getLibros() {
   return res.json();
 }
 
-export default async function RootLayout() {
+export default async function Home() {
   const libros = await getLibros();
 
   return (
-    <html>
-      <body >
-        <header>
-        <nav>
+    <div>
+      <div className="nav">
         <h1>Tienda en desarrollo</h1>
         <div className="div2">
           <input type="text" id="texto" name="texto" placeholder="Busca aqui..." />
         </div>
-        <div><h2>Mi cuenta</h2></div>
-          </nav></header>
-        <div>
+      </div>
+      <div>
         {libros.map((libro) => (
           <Link href={`/bibliotecatic/libros/${libro.id}`} key={libro.id}>
+            <a>
               <div>
                 <img src={libro.portadaUrl || "/file.svg"} alt={libro.titulo} />
                 <h2>{libro.titulo}</h2>
-                <p>{libro.autor?.nombre && `Autor: ${libro.autor.nombre}`}</p>
+                <p>por {libro.autor?.nombre && `Autor: ${libro.autor.nombre}`}</p>
               </div>
+            </a>
           </Link>
         ))}
       </div>
-      </body>
-    </html>
+    </div>
   );
 }
