@@ -21,7 +21,7 @@ export default async function RootLayout() {
         <div className="div2">
           <input type="text" id="texto" name="texto" placeholder="Busca aqui..." />
         </div>
-        <div><h2>Mi cuenta</h2></div>
+        <div><Link href="/"><h2>Mi cuenta</h2></Link></div>
           </nav></header>
         <div>
         {libros.map((libro) => (
